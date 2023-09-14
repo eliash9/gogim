@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> GOGIM </title>
+    <meta viewport="width=device-width, initial-scale=0.7">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    <link rel="stylesheet" href="style.css">   
+</head>
+
+<body>
+    <div id="sticky-div" class="image-container" style="background-image: url('img/gogim.png');"><p>HOME</p></div>
+
+</div>
+
+<script>
+    // Fetch the JSON data
+    fetch('games.json')
+        .then(response => response.json())
+        .then(data => {
+            // Loop through the data and create image containers
+            data.forEach((item, index) => {
+                const div = document.createElement('div');
+                div.classList.add('image-container'); // Add a class for styling
+                div.style.backgroundImage = `url(${item.imageSrc})`;
+                div.addEventListener('click', function () {
+                    const urlToGo = `${item.url}`;
+                    window.location.href = urlToGo;
+                });
+                const caption = document.createElement('p');
+                caption.textContent = `${item.name}`;
+                div.appendChild(caption);
+                document.body.appendChild(div);
+            });
+        })
+        .catch(error => console.error('Error fetching JSON data:', error));
+</script>
+
+
+</body>
+
+</html>
